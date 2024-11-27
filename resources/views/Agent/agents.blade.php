@@ -39,6 +39,7 @@
                                         <th>#</th>
                                         <th>Ismi</th>
                                         <th>Tel</th>
+                                        <th>Products</th>
                                         <th>Add</th>
                                         <th>Sale</th>
                                         <th>Actions</th>
@@ -57,6 +58,41 @@
                                             </a>
                                         </td>
                                         <td>{{$agent->tel}}</td>
+                                       
+                                        <td>
+                                            <!-- Products Button trigger modal -->
+                                            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#productsModal-{{ $agent->id }}">
+                                                Products
+                                            </button>
+                                        
+                                            <!-- Modal for Products -->
+                                            <div class="modal fade" id="productsModal-{{ $agent->id }}" tabindex="-1" aria-labelledby="productsModalLabel-{{ $agent->id }}" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="productsModalLabel-{{ $agent->id }}">Products for {{ $agent->name }}</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            @if($agent->products->isEmpty())
+                                                                <p>No products available for this agent.</p>
+                                                            @else
+                                                                <ul>
+                                                                    @foreach($agent->products->unique('id') as $product)  <!-- unique() metodidan foydalanish -->
+                                                                        <li>{{ $product->name }} - {{ $product->price }} USD</li>
+                                                                    @endforeach
+                                                                </ul>
+                                                            @endif
+                                                        </div>
+                                                        
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        
                                         <td>
                                             <!-- Button trigger modal -->
                                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-{{ $agent->id }}">

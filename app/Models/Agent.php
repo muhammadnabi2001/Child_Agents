@@ -20,7 +20,8 @@ class Agent extends Model
         return $this->belongsTo(Agent::class,'parent_id');
     }
     public function products()
-    {
-        return $this->belongsToMany(Product::class, 'agent_products');
-    }
+{
+    return $this->belongsToMany(Product::class, 'agent_products', 'parent_id', 'product_id');
+}
+
 }
