@@ -14,3 +14,7 @@ Route::get('agents',[AgentController::class,'agents'])->name('agents');
 Route::get('parentcreate',[AgentController::class,'create'])->name('parentcreate');
 Route::post('parentstore',[AgentController::class,'parentstore'])->name('parentstore');
 Route::get('childs/{agent}',[AgentController::class,'childs'])->name('childs');
+Route::get('agentedit/{agent}',[AgentController::class,'agentedit'])->name('agentedit');
+Route::post('parentupdate/{agent}',[AgentController::class,'parentupdate'])->name('parentupdate');
+Route::get('agentdelete/{agent}',[AgentController::class,'agentdelete'])->name('agentdelete');
+Route::post('addchild/{id}',[AgentController::class,'addchild'])->name('addchild');

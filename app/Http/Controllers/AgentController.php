@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddChildRequest;
 use App\Http\Requests\AgentStoreRequest;
+use App\Http\Requests\AgentUpdateRequest;
 use App\Models\Agent;
 use Illuminate\Http\Request;
 
@@ -33,5 +35,39 @@ class AgentController extends Controller
         $agents=$agent->children()->paginate(5);
         return view('Agent.agents',['agents'=>$agents]);
         
+    }
+    public function agentedit(Agent $agent)
+    {
+        //dd($agent);
+        return view('Agent.agentedit',['agent'=>$agent]);
+    }
+    public function parentupdate(AgentUpdateRequest $request,Agent $agent)
+    {
+        $data=$request->validated();
+        //dd($data['tel']);
+        $agent->name=$data['name'];
+        $agent->tel=$data['tel'];
+        $agent->save();
+        return redirect('agents')->with('success',"Ma'lumot muvvafaqiyatili yangilandi");
+        
+    }
+    public function agentdelete(Agent $agent)
+    {
+        //dd($agent);
+        $agent->delete();
+        return redirect('agents')->with('success',"Ma'lumot muvvafaqiyatili o'chirildi");
+
+    }
+    public function addchild(AddChildRequest $request,int $id)
+    {
+        //dd($id);
+        $data=$request->validated();
+        $child=new Agent();
+        $child->parent_id=$id;
+        $child->name=$data['name'];
+        $child->tel=$data['tel'];
+        $child->save();
+        return redirect('agents')->with('success',"Ma'lumot muvvafaqiyatili qo'shildi");
+
     }
 }
