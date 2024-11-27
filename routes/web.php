@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AgentController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TalabaController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,3 +19,7 @@ Route::get('agentedit/{agent}',[AgentController::class,'agentedit'])->name('agen
 Route::post('parentupdate/{agent}',[AgentController::class,'parentupdate'])->name('parentupdate');
 Route::get('agentdelete/{agent}',[AgentController::class,'agentdelete'])->name('agentdelete');
 Route::post('addchild/{id}',[AgentController::class,'addchild'])->name('addchild');
+
+Route::get('product',[ProductController::class,'product'])->name('product');
+Route::get('createproduct',[ProductController::class,'createproduct'])->name('createproduct');
+Route::post('productstore',[ProductController::class,'productstore'])->name('productstore');

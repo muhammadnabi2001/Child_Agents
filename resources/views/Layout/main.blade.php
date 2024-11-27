@@ -127,12 +127,17 @@
                         
 
                         <li class="nav-item">
-                            <a href="/agents" class="nav-link {{ request()->is('regions') ? 'active' : '' }}">
+                            <a href="/agents" class="nav-link {{ request()->is('agents') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-globe"></i>
                                 <p>Agents</p>
                             </a>
                         </li>
-
+                        <li class="nav-item">
+                            <a href="/product" class="nav-link {{ request()->is('product') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-tasks"></i> <!-- Topshiriqlarim Ikonka -->
+                                <p>Product</p>
+                            </a>
+                        </li>
 
 
                         
