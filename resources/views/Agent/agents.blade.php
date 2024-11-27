@@ -40,6 +40,7 @@
                                         <th>Ismi</th>
                                         <th>Tel</th>
                                         <th>Add</th>
+                                        <th>Sale</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -91,6 +92,47 @@
                                                 </div>
                                             </div>
                                         </td>
+                                        <td>
+                                            <!-- Sale Button trigger modal -->
+                                            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#saleModal-{{ $agent->id }}">
+                                                Sale
+                                            </button>
+                                        
+                                            <!-- Modal for Sale -->
+                                            <div class="modal fade" id="saleModal-{{ $agent->id }}" tabindex="-1" aria-labelledby="saleModalLabel-{{ $agent->id }}" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="saleModalLabel-{{ $agent->id }}">Sale for {{ $agent->name }}</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form action="{{ route('sotish', $agent->id) }}" method="POST">
+                                                                @csrf
+                                                                <div class="mb-3">
+                                                                    <label for="productSelect" class="form-label">Select Product</label>
+                                                                    <select class="form-select" id="productSelect" name="product_id" required>
+                                                                        <option value="">Select a product</option>
+                                                                        @foreach($products as $product)
+                                                                            <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label for="price" class="form-label">Sale Price</label>
+                                                                    <input type="number" class="form-control" id="price" name="price" required>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                    <button type="submit" class="btn btn-primary">Save Sale</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        
                                         
                                         <td>
                                             <a href="{{route('agentedit',$agent->id)}}" class="btn btn-success"><svg

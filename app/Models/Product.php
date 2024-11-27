@@ -8,6 +8,6 @@ class Product extends Model
 {
     public function agents()
     {
-        return $this->belongsToMany(Agent::class, 'product_agent');
+        return $this->belongsToMany(Agent::class, 'agent_products');
     }
 }

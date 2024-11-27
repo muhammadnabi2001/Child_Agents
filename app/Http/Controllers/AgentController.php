@@ -6,14 +6,16 @@ use App\Http\Requests\AddChildRequest;
 use App\Http\Requests\AgentStoreRequest;
 use App\Http\Requests\AgentUpdateRequest;
 use App\Models\Agent;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class AgentController extends Controller
 {
     public function agents()
     {
+        $products=Product::all();
         $agents=Agent::orderBy('id','desc')->where('parent_id','=',0)->paginate(10);
-        return view('Agent.agents',['agents'=>$agents]);
+        return view('Agent.agents',['agents'=>$agents,'products'=>$products]);
     }
     public function create()
     {
@@ -33,7 +35,8 @@ class AgentController extends Controller
     {
         //dd($agent);
         $agents=$agent->children()->paginate(5);
-        return view('Agent.agents',['agents'=>$agents]);
+        $products=Product::all();
+        return view('Agent.agents',['agents'=>$agents,'products'=>$products]);
         
     }
     public function agentedit(Agent $agent)
